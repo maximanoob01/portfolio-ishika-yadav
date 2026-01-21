@@ -6,12 +6,10 @@
   <title>Ishika Yadav | Social Media Manager & Strategist</title>
   <meta name="description" content="Portfolio of Ishika Yadav — Social Media Manager specializing in Instagram growth, content systems, and AI-driven strategy.">
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
 
-  <!-- Icons -->
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -28,15 +26,16 @@
       --bg-color: #FDFCFB;
       --text-main: #141414;
       --text-muted: #565656;
-      --glass-bg: rgba(255, 255, 255, 0.7);
+      --glass-bg: rgba(255, 255, 255, 0.65);
       --glass-border: rgba(255, 255, 255, 0.8);
       --accent-1: #6C4CF4;
       --accent-2: #FF4FD8;
       --gradient-main: linear-gradient(120deg, #6C4CF4, #FF4FD8);
       --shadow-card: 0 15px 45px -10px rgba(108, 76, 244, .15);
       
-      /* UI */
-      --ring: 0 0 0 3px rgba(108, 76, 244, .18);
+      /* Animation Variables */
+      --ease-soothe: cubic-bezier(0.23, 1, 0.32, 1); /* The "Soothing" curve */
+      --ease-bouncy: cubic-bezier(0.68, -0.55, 0.265, 1.55);
     }
 
     [data-theme="dark"] {
@@ -44,12 +43,11 @@
       --text-main: #F5F7FA;
       --text-muted: #A4A6B1;
       --glass-bg: rgba(20, 20, 25, .6);
-      --glass-border: rgba(255, 255, 255, .15);
+      --glass-border: rgba(255, 255, 255, .1);
       --accent-1: #9A7BFF;
       --accent-2: #64E9FF;
       --gradient-main: linear-gradient(130deg, #9A7BFF, #64E9FF);
       --shadow-card: 0 15px 50px -10px rgba(0, 0, 0, .7);
-      --ring: 0 0 0 3px rgba(154, 123, 255, .22);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -61,17 +59,29 @@
       color: var(--text-main);
       overflow-x: hidden;
       line-height: 1.7;
-      transition: background .5s ease, color .5s ease;
+      transition: background 0.8s var(--ease-soothe), color 0.8s var(--ease-soothe);
+      
+      /* Dynamic Background */
       background-image: 
         radial-gradient(at 0% 0%, rgba(108, 76, 244, 0.15) 0px, transparent 50%),
-        radial-gradient(at 100% 0%, rgba(255, 79, 216, 0.15) 0px, transparent 50%);
+        radial-gradient(at 100% 0%, rgba(255, 79, 216, 0.15) 0px, transparent 50%),
+        radial-gradient(at 50% 100%, rgba(108, 76, 244, 0.1) 0px, transparent 50%);
+      background-size: 200% 200%;
       background-attachment: fixed;
+      animation: gradient-drift 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes gradient-drift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     /* Ambient Grain */
     .grain-overlay {
       position: fixed; inset: 0; pointer-events: none; z-index: 0;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.65' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.4;
     }
 
     /* Scroll Progress Bar */
@@ -79,11 +89,11 @@
       height: 3px;
       background: var(--gradient-main);
       width: 0%;
-      position: absolute;
-      bottom: 0;
+      position: fixed;
+      top: 0;
       left: 0;
       transition: width 0.1s;
-      z-index: 101;
+      z-index: 102;
     }
 
     /* Cursor Halo */
@@ -93,13 +103,15 @@
       border-radius: 50%;
       position: fixed; pointer-events: none; z-index: 9999; 
       transform: translate(-50%, -50%);
-      transition: width .2s, height .2s, background-color .2s; 
+      transition: width 0.4s var(--ease-soothe), height 0.4s var(--ease-soothe), background-color 0.4s; 
       display: none;
+      mix-blend-mode: difference;
     }
     .cursor-halo.hovered { 
-      width: 50px; height: 50px; 
-      background-color: rgba(108, 76, 244, .1); 
+      width: 60px; height: 60px; 
+      background-color: rgba(255, 255, 255, 0.2); 
       border-color: transparent; 
+      backdrop-filter: blur(2px);
     }
     @media (pointer: fine) { .cursor-halo { display: block; } }
 
@@ -116,9 +128,11 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 3rem;
+      display: inline-block;
+      width: 100%;
     }
 
-    a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+    a { text-decoration: none; color: inherit; transition: all 0.3s var(--ease-soothe); }
     button, input, textarea, select { font: inherit; }
 
     /* Layout */
@@ -126,50 +140,86 @@
     .section-padding { padding: 6rem 0; }
     .card-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; }
     
+    /* GLASS CARD - Updated with soothing hover */
     .glass-card {
       background: var(--glass-bg); 
-      backdrop-filter: blur(12px); 
+      backdrop-filter: blur(16px); 
+      -webkit-backdrop-filter: blur(16px);
       border: 1px solid var(--glass-border);
       border-radius: 20px; 
       padding: 2rem; 
       box-shadow: var(--shadow-card);
-      transition: transform .35s ease, box-shadow .35s ease;
+      transition: transform 0.6s var(--ease-soothe), box-shadow 0.6s var(--ease-soothe), border-color 0.3s;
+      position: relative;
+      overflow: hidden;
     }
-    .glass-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+    
+    .glass-card:hover { 
+      transform: translateY(-10px) scale(1.01); 
+      box-shadow: 0 30px 60px -15px rgba(0,0,0,0.15); 
+      border-color: rgba(255,255,255,0.9);
+    }
+
+    /* Subtle shimmer effect on hover */
+    .glass-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 50%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: 0.5s;
+      transform: skewX(-25deg);
+      pointer-events: none;
+    }
+    .glass-card:hover::after {
+      left: 150%;
+      transition: 0.7s ease-in-out;
+    }
 
     /* Navbar */
     .navbar {
       position: fixed; top: 0; width: 100%; z-index: 100;
-      background: rgba(255, 255, 255, .7);
-      backdrop-filter: blur(15px);
+      background: rgba(255, 255, 255, .75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--glass-border);
       transition: background .4s;
     }
-    [data-theme="dark"] .navbar { background: rgba(12, 12, 18, .7); }
+    [data-theme="dark"] .navbar { background: rgba(12, 12, 18, .75); }
     
     .nav-container { display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; }
     .logo { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 700; }
     
     .nav-links { display: flex; gap: 2rem; align-items: center; }
-    .nav-links a:hover { color: var(--accent-1); }
+    .nav-links a { position: relative; }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -5px; left: 0; width: 0%; height: 2px;
+      background: var(--gradient-main); transition: width 0.4s var(--ease-soothe);
+    }
+    .nav-links a:hover::after { width: 100%; }
+
     .menu-toggle { display: none; background: none; border: none; font-size: 1.5rem; color: var(--text-main); cursor: pointer; }
 
     /* Hero */
     .hero-section { min-height: 100vh; display: flex; align-items: center; padding-top: 80px; }
     .hero-content { display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
     .hero-text { flex: 1; }
-    .hero-img { flex: 1; display: flex; justify-content: center; }
+    .hero-img { flex: 1; display: flex; justify-content: center; perspective: 1000px; }
     
     .hero-img img { 
       width: 100%;
-      max-width: 350px; /* Ensures it doesn't get too big */
+      max-width: 350px;
       height: auto;
       aspect-ratio: 1/1;
       object-fit: cover; 
       border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
       border: 4px solid var(--glass-border);
-      animation: float 6s ease-in-out infinite;
+      animation: float 8s ease-in-out infinite; /* Slower float */
       box-shadow: var(--shadow-card);
+      transition: border-radius 1s ease;
+    }
+    .hero-img img:hover {
+       border-radius: 50%;
     }
 
     /* Buttons */
@@ -177,19 +227,23 @@
       background: var(--gradient-main); color: #fff; padding: .9rem 2.2rem; 
       border-radius: 50px; font-weight: 600; border: none; cursor: pointer; display: inline-block;
       box-shadow: 0 10px 20px rgba(108, 76, 244, .3);
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      transition: transform 0.4s var(--ease-soothe), box-shadow 0.4s var(--ease-soothe);
     }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(108, 76, 244, .4); }
+    .btn-primary:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 20px 40px rgba(108, 76, 244, .4); }
     
     .btn-secondary {
       background: transparent; border: 2px solid var(--accent-1); color: var(--text-main);
       padding: .8rem 2rem; border-radius: 50px; font-weight: 600; cursor: pointer; display: inline-block;
+      transition: all 0.4s var(--ease-soothe);
     }
-    .btn-secondary:hover { background: var(--accent-1); color: #fff; }
+    .btn-secondary:hover { background: var(--accent-1); color: #fff; transform: translateY(-3px); }
 
     /* Stats */
     .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: -3rem; padding-bottom: 3rem; }
     .stat-card { text-align: center; padding: 1.5rem; background: var(--glass-bg); border-radius: 16px; border: 1px solid var(--glass-border); }
-    .stat-card i { font-size: 2rem; color: var(--accent-1); margin-bottom: 0.5rem; }
+    .stat-card i { font-size: 2rem; color: var(--accent-1); margin-bottom: 0.5rem; display: inline-block; transition: transform 0.5s var(--ease-bouncy); }
+    .stat-card:hover i { transform: scale(1.3) rotate(10deg); }
     .counter { font-size: 2.5rem; font-weight: 700; color: var(--text-main); }
 
     /* Grid Layouts & Responsive Styles */
@@ -201,30 +255,21 @@
       .container { padding: 0 1.5rem; }
       .info-card, .project-card, .exp-card { grid-column: span 12; } 
       .contact-wrapper { grid-template-columns: 1fr; } 
-      
       .hero-section { padding-top: 100px; padding-bottom: 60px; }
       .hero-content { flex-direction: column-reverse; text-align: center; gap: 3rem; }
       
-      /* Mobile Menu Styles */
       .menu-toggle { display: block; }
       .nav-links { 
         display: none; 
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        flex-direction: column;
-        background: var(--bg-color);
-        padding: 2rem;
+        position: absolute; top: 100%; left: 0; width: 100%;
+        flex-direction: column; background: var(--bg-color); padding: 2rem;
         border-bottom: 1px solid var(--glass-border);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        z-index: 100;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1); z-index: 100;
       }
       .nav-links.active { display: flex; }
       .cta-buttons { justify-content: center; }
     }
 
-    /* Small Mobile Breakpoint */
     @media (max-width: 480px) {
         h1 { font-size: 2.5rem; }
         .hero-img img { max-width: 280px; }
@@ -234,10 +279,17 @@
 
     /* Skills Tags */
     .tag-cloud { display: flex; flex-wrap: wrap; gap: .8rem; }
-    .tag { padding: .5rem 1rem; border-radius: 50px; background: rgba(255,255,255,0.5); border: 1px solid var(--glass-border); font-size: 0.85rem; font-weight: 600; }
+    .tag { 
+      padding: .5rem 1rem; border-radius: 50px; 
+      background: rgba(255,255,255,0.5); border: 1px solid var(--glass-border); 
+      font-size: 0.85rem; font-weight: 600; 
+      transition: all 0.3s ease;
+    }
+    .tag:hover { background: var(--accent-1); color: #fff; transform: translateY(-3px); }
     [data-theme="dark"] .tag { background: rgba(255,255,255,0.1); }
+    [data-theme="dark"] .tag:hover { background: var(--accent-1); }
 
-    /* Chip (For Project Cards) */
+    /* Chip */
     .chip {
       display: inline-block; padding: .25rem .75rem; border-radius: 50px; 
       background: rgba(108, 76, 244, 0.1); color: var(--accent-1); 
@@ -246,82 +298,71 @@
     
     /* EDUCATION SECTION */
     .edu-card {
-      grid-column: span 6;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 1.5rem;
+      grid-column: span 6; display: flex; flex-direction: row; align-items: center; gap: 1.5rem;
     }
     .edu-img {
-      width: 100px;
-      height: 100px;
-      border-radius: 12px;
-      object-fit: cover;
-      flex-shrink: 0;
-      border: 1px solid var(--glass-border);
+      width: 100px; height: 100px; border-radius: 12px; object-fit: cover; flex-shrink: 0; border: 1px solid var(--glass-border);
+      transition: transform 0.5s var(--ease-soothe);
     }
+    .edu-card:hover .edu-img { transform: scale(1.1) rotate(-3deg); }
+    
     @media (max-width: 600px) {
       .edu-card { flex-direction: column; text-align: center; padding: 2rem; }
     }
 
-    /* Animations */
-    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
-    .fade-in { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+    /* =========================================================
+       ANIMATIONS (Soothing & Staggered)
+       ========================================================= */
+    
+    @keyframes float { 
+      0%, 100% { transform: translateY(0); } 
+      50% { transform: translateY(-20px); } 
+    }
+
+    /* Scroll Reveal Animation */
+    .fade-in { 
+      opacity: 0; 
+      transform: translateY(40px); 
+      transition: opacity 1s var(--ease-soothe), transform 1s var(--ease-soothe); 
+    }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
     
+    /* Staggered Delays for Grid Items (Auto-applied via Nth-child logic below or classes) */
+    .stagger-1 { transition-delay: 100ms; }
+    .stagger-2 { transition-delay: 200ms; }
+    .stagger-3 { transition-delay: 300ms; }
+
+    /* Specific Hero Text Animations */
+    .hero-text > * { opacity: 0; transform: translateY(20px); animation: fadeInUp 1s var(--ease-soothe) forwards; }
+    .hero-text p.intro { animation-delay: 0.2s; }
+    .hero-text h1 { animation-delay: 0.4s; }
+    .hero-text p.subtext { animation-delay: 0.6s; }
+    .hero-text .cta-buttons { animation-delay: 0.8s; opacity: 0; }
+
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     /* Footer */
     footer { text-align: center; padding: 3rem; color: var(--text-muted); border-top: 1px solid var(--glass-border); }
 
-    /* Contact Form */
-    .contact-form input, .contact-form select, .contact-form textarea {
-      width: 100%; padding: 1rem; margin-bottom: 1rem; border-radius: 8px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.3);
-    }
-    [data-theme="dark"] .contact-form input { background: rgba(0,0,0,0.3); }
-
     /* Social Buttons */
-    .contact-links {
-      display: flex;
-      flex-direction: row;
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-      flex-wrap: wrap; 
-    }
-    @media (max-width: 480px) {
-        .contact-links { justify-content: center; }
-    }
+    .contact-links { display: flex; flex-direction: row; gap: 1.5rem; margin-top: 1.5rem; flex-wrap: wrap; }
+    @media (max-width: 480px) { .contact-links { justify-content: center; } }
 
     .social-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      font-size: 2rem;
-      color: var(--text-main);
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: flex; align-items: center; justify-content: center;
+      width: 64px; height: 64px; border-radius: 50%;
+      background: var(--glass-bg); border: 1px solid var(--glass-border);
+      font-size: 2rem; color: var(--text-main);
+      transition: all 0.5s var(--ease-bouncy);
       text-decoration: none;
     }
-
-    /* Hover Animations & Brand Colors */
-    .social-btn:hover {
-      transform: translateY(-5px) scale(1.15);
-      background: #fff;
-    }
+    .social-btn:hover { transform: translateY(-8px); background: #fff; }
     [data-theme="dark"] .social-btn:hover { background: #1a1a1a; }
-
-    .social-btn.email:hover { color: #EA4335; box-shadow: 0 10px 25px rgba(234, 67, 53, 0.4); }
-    .social-btn.instagram:hover { color: #E1306C; box-shadow: 0 10px 25px rgba(225, 48, 108, 0.4); }
-    .social-btn.linkedin:hover { color: #0077B5; box-shadow: 0 10px 25px rgba(0, 119, 181, 0.4); }
-
-    /* Active Glow Effect on Click */
-    .social-btn:active {
-      transform: scale(0.95);
-      box-shadow: 0 0 20px var(--accent-1), 0 0 40px var(--accent-2);
-      border-color: var(--accent-1);
-    }
+    .social-btn.email:hover { color: #EA4335; box-shadow: 0 10px 30px rgba(234, 67, 53, 0.3); }
+    .social-btn.instagram:hover { color: #E1306C; box-shadow: 0 10px 30px rgba(225, 48, 108, 0.3); }
+    .social-btn.linkedin:hover { color: #0077B5; box-shadow: 0 10px 30px rgba(0, 119, 181, 0.3); }
 
   </style>
 </head>
@@ -340,7 +381,7 @@
         <a href="#about">About</a>
         <a href="#education">Education</a>
         <a href="#work">Work</a>
-        <a href="#services">Services</a>
+        <a href="services.html">Services</a>
         <a href="#experience">Experience</a>
         <a href="#contact">Contact</a>
         <button id="themeToggleMobile" style="background:none; border:none; cursor:pointer; font-size:1.2rem; margin-left:1rem;">
@@ -363,22 +404,22 @@
     
     <header id="hero" class="hero-section">
       <div class="container hero-content">
-        <div class="hero-text fade-in">
+        <div class="hero-text">
           <p class="intro" style="color: var(--accent-1); font-weight:600; margin-bottom:1rem;">👋 Hey there, I’m Ishika Yadav</p>
           <h1>Social Media Manager & <br> Content Strategist</h1>
           <p class="subtext" style="font-size: 1.1rem; max-width: 500px; margin: 1.5rem 0; color: var(--text-muted);">
             I help brands stop scrolling and start growing. Specializing in Instagram Strategy, AI-driven workflows, and turning followers into a loyal community.
           </p>
           <div class="cta-buttons">
-            <a href="#work" class="btn-primary">View Portfolio</a>
+            <a href="https://www.instagram.com/ishika.yadav.30/" target="_blank" class="btn-primary">
+              <i class="ph ph-instagram-logo" style="font-size: 1.2rem;"></i> View Instagram
+            </a>
             <a href="assets/ishiika.smm.pdf" class="btn-secondary" target="_blank">View Resume</a>
           </div>
         </div>
 
         <div class="hero-img fade-in">
-          <!-- Placeholder Image -->
-          <img src="assets/picture1.jpg" 
-               alt="Ishika Yadav Social Media Manager">
+          <img src="assets/picture1.jpg" alt="Ishika Yadav Social Media Manager">
         </div>
       </div>
     </header>
@@ -386,17 +427,17 @@
     <section class="stats-section fade-in">
       <div class="container">
         <div class="stats-grid">
-          <div class="stat-card glass-card">
+          <div class="stat-card glass-card stagger-1">
             <i class="ph ph-users-three"></i>
             <h3 class="counter">150k+</h3>
             <p class="sub-meta">Monthly Impressions</p>
           </div>
-          <div class="stat-card glass-card">
+          <div class="stat-card glass-card stagger-2">
             <i class="ph ph-trend-up"></i>
             <h3 class="counter">45%</h3>
             <p class="sub-meta">Avg. Reach Growth</p>
           </div>
-          <div class="stat-card glass-card">
+          <div class="stat-card glass-card stagger-3">
             <i class="ph ph-check-circle"></i>
             <h3 class="counter">20+</h3>
             <p class="sub-meta">Campaigns Managed</p>
@@ -405,25 +446,24 @@
       </div>
     </section>
 
-    <!-- ABOUT SECTION -->
     <section id="about" class="section-padding fade-in">
       <div class="container">
         <h2 class="section-title">About Me</h2>
         
         <div class="card-grid">
-          <div class="info-card glass-card">
+          <div class="info-card glass-card stagger-1">
             <div class="card-head">
               <i class="ph ph-user-circle"></i>
               <h3>The Strategist</h3>
             </div>
-            <p>I don't just post; I plan. My journey started with a curiosity for algorithms and evolved into a career managing influencer pages and café brands. Currently driving growth at <strong>INGLU</strong>.</p>
+            <p>I don't just post; I plan. My journey started with a curiosity for algorithms and evolved into a career managing influencer pages and café brands.</p>
             <ul class="meta-list" style="margin-top:1rem; list-style:none;">
               <li style="margin-bottom:0.5rem"><i class="ph ph-map-pin" style="color:var(--accent-1)"></i> Kota, Rajasthan (Remote Ready)</li>
               <li><i class="ph ph-translate" style="color:var(--accent-1)"></i> English, Hindi</li>
             </ul>
           </div>
 
-          <div class="info-card glass-card">
+          <div class="info-card glass-card stagger-2">
             <div class="card-head">
               <i class="ph ph-magic-wand"></i>
               <h3>My Toolkit</h3>
@@ -435,7 +475,7 @@
               <span class="tag">Copywriting</span>
               <span class="tag">Adobe Illustrator</span>
               <span class="tag">Canva</span>
-              <span class="tag">Premire Pro</span>
+              <span class="tag">Premiere Pro</span>
               <span class="tag">Notion</span>
             </div>
           </div>
@@ -443,13 +483,12 @@
       </div>
     </section>
 
-    <!-- EDUCATION SECTION -->
     <section id="education" class="section-padding fade-in">
       <div class="container">
         <h2 class="section-title">Education</h2>
         <div class="card-grid">
           
-          <div class="edu-card glass-card">
+          <div class="edu-card glass-card stagger-1">
             <img src="assets/coer.jpg.jpg" alt="College Logo" class="edu-img">
             <div>
               <span class="sub-meta" style="color:var(--accent-1); font-weight:600;">2023 - 2027</span>
@@ -459,7 +498,7 @@
             </div>
           </div>
 
-          <div class="edu-card glass-card">
+          <div class="edu-card glass-card stagger-2">
             <img src="assets/school.jpeg" alt="Certification Logo" class="edu-img">
             <div>
               <span class="sub-meta" style="color:var(--accent-1); font-weight:600;">2021 - 2022</span>
@@ -473,14 +512,12 @@
       </div>
     </section>
 
-    <!-- PROJECTS SECTION -->
     <section id="work" class="section-padding fade-in">
       <div class="container">
         <h2 class="section-title">Featured Projects</h2>
         <div class="card-grid">
           
-          <!-- Project 1: Lazy Leaf -->
-          <article class="project-card glass-card">
+          <article class="project-card glass-card stagger-1">
             <div class="card-head">
                <span class="chip">Cafe Brand</span>
                <h3>Lazy Leaf</h3>
@@ -493,8 +530,7 @@
             <a href="https://www.instagram.com/thelazyleafkota" target="_blank" class="btn-secondary" style="text-align:center; font-size:0.9rem;">Visit Page <i class="ph ph-arrow-up-right"></i></a>
           </article>
 
-          <!-- Project 2: Green Cucina -->
-          <article class="project-card glass-card">
+          <article class="project-card glass-card stagger-2">
             <div class="card-head">
                <span class="chip">F&B Brand</span>
                <h3>GREEN CUCINA</h3>
@@ -507,8 +543,7 @@
             <a href="https://www.instagram.com/greencucinaa" target="_blank" class="btn-secondary" style="text-align:center; font-size:0.9rem;">Visit Page <i class="ph ph-arrow-up-right"></i></a>
           </article>
 
-          <!-- Project 3: Priya Yadav -->
-          <article class="project-card glass-card">
+          <article class="project-card glass-card stagger-3">
             <div class="card-head">
                <span class="chip">Influencer</span>
                <h3>Priya Yadav</h3>
@@ -521,30 +556,27 @@
             <a href="https://www.instagram.com/priyadavpy" target="_blank" class="btn-secondary" style="text-align:center; font-size:0.9rem;">Visit Page <i class="ph ph-arrow-up-right"></i></a>
           </article>
 
-          
-
         </div>
       </div>
     </section>
 
-    <!-- EXPERIENCE SECTION -->
     <section id="experience" class="section-padding fade-in">
       <div class="container">
         <h2 class="section-title">Experience</h2>
         <div class="card-grid">
           
-          <div class="exp-card glass-card">
+          <div class="exp-card glass-card stagger-1">
             <div class="card-head">
-              <i class="ph ph-briefcase"></i>
+              <i class="ph ph-video-camera"></i>
               <div>
-                <h3>Social Media Manager</h3>
-                <p class="sub-meta">INGLU | OCT 2025 - Present</p>
+                <h3>Full Time Content Creator</h3>
+                <p class="sub-meta">Independent | Jan 2026 - Present</p>
               </div>
             </div>
-            <p>Leading the College Connect initiative, managing content calendars, and analyzing monthly growth metrics for campus ambassador programs.</p>
+            <p>Dedicated to creating high-impact content and building an engaged community. Ideating, scripting, filming, and editing consistent video content while experimenting with viral formats and new platform features.</p>
           </div>
 
-          <div class="exp-card glass-card">
+          <div class="exp-card glass-card stagger-2">
             <div class="card-head">
               <i class="ph ph-storefront"></i>
               <div>
@@ -555,7 +587,7 @@
             <p>Managed cafe and influencer accounts. Handled everything from shooting content on iPhone to final analytics reporting. Achieved +45% engagement for local brands.</p>
           </div>
 
-          <div class="exp-card glass-card">
+          <div class="exp-card glass-card stagger-3">
             <div class="card-head">
               <i class="ph ph-pencil-circle"></i>
               <div>
@@ -570,7 +602,12 @@
       </div>
     </section>
 
-    <!-- CONTACT SECTION -->
+    <div class="container fade-in" style="text-align: center; margin: 4rem auto;">
+      <a href="services.html" class="btn-primary" style="font-size: 1.1rem; padding: 1rem 2.5rem;">
+        Explore Business <i class="ph ph-arrow-right" style="margin-left: 0.5rem;"></i>
+      </a>
+    </div>
+
     <section id="contact" class="section-padding fade-in">
       <div class="container">
         <div class="glass-card contact-wrapper">
@@ -580,31 +617,29 @@
             <p style="margin-bottom: 2rem;">Ready to take your social media off autopilot? I’m currently open for new projects.</p>
             
             <div class="contact-links">
-  <a href="mailto:yadavishika2130@gmail.com" class="social-btn email" aria-label="Email">
-    <i class="ph ph-envelope"></i>
-  </a>
+              <a href="mailto:yadavishika2130@gmail.com" class="social-btn email" aria-label="Email">
+                <i class="ph ph-envelope"></i>
+              </a>
 
-  <a href="https://www.instagram.com/ishika.yadav.30/" target="_blank" rel="noopener noreferrer" class="social-btn instagram" aria-label="Instagram">
-    <i class="ph ph-instagram-logo"></i>
-  </a>
+              <a href="https://www.instagram.com/ishika.yadav.30/" target="_blank" rel="noopener noreferrer" class="social-btn instagram" aria-label="Instagram">
+                <i class="ph ph-instagram-logo"></i>
+              </a>
 
-  <a href="https://www.linkedin.com/in/ishika-yadav-48a503278/" target="_blank" rel="noopener noreferrer" class="social-btn linkedin" aria-label="LinkedIn">
-    <i class="ph ph-linkedin-logo"></i>
-  </a>
-</div>
-
-
+              <a href="https://www.linkedin.com/in/ishika-yadav-48a503278/" target="_blank" rel="noopener noreferrer" class="social-btn linkedin" aria-label="LinkedIn">
+                <i class="ph ph-linkedin-logo"></i>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <footer style="text-align:center; padding: 2rem; opacity:0.7;">
-      <p>&copy; 2025 Ishika Yadav. Built with ❤️❤️</p>
+      <p>&copy; 2025 Ishika Yadav. Built with ❤️</p>
     </footer>
 
   </main>
 
-  <!-- JAVASCRIPT -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       
@@ -687,7 +722,7 @@
          4. Number Counters (Animated)
          ========================================================= */
       const counters = document.querySelectorAll(".counter");
-      const speed = 200; 
+      const speed = 100; // Slower speed for soothing effect
 
       const counterObserver = new IntersectionObserver((entries, observer) => {
           entries.forEach(entry => {
@@ -709,7 +744,7 @@
                       if (current < target) {
                           const nextVal = Math.ceil(current + increment);
                           counter.innerText = nextVal + suffix; 
-                          setTimeout(updateCount, 20);
+                          setTimeout(updateCount, 25);
                       } else {
                           counter.innerText = target + suffix; 
                       }
@@ -723,7 +758,7 @@
       counters.forEach(counter => counterObserver.observe(counter));
 
       /* =========================================================
-         5. Fade-In Animation on Scroll
+         5. Fade-In Animation on Scroll (Soothing)
          ========================================================= */
       const faders = document.querySelectorAll(".fade-in");
       
@@ -734,7 +769,7 @@
                   fadeObserver.unobserve(entry.target);
               }
           });
-      }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+      }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
 
       faders.forEach(fader => fadeObserver.observe(fader));
 
@@ -745,6 +780,7 @@
       
       if (cursor && window.matchMedia("(pointer: fine)").matches) {
           document.addEventListener("mousemove", (e) => {
+              // Added small delay logic via CSS transition, just updating coordinates here
               cursor.style.left = e.clientX + "px";
               cursor.style.top = e.clientY + "px";
           });
@@ -754,32 +790,6 @@
           hoverTargets.forEach(el => {
               el.addEventListener("mouseenter", () => cursor.classList.add("hovered"));
               el.addEventListener("mouseleave", () => cursor.classList.remove("hovered"));
-          });
-      }
-
-      /* =========================================================
-         7. Form Submission Handling
-         ========================================================= */
-      const form = document.querySelector(".contact-form");
-      if (form) {
-          form.addEventListener("submit", function(e) {
-              const btn = form.querySelector("button");
-              const originalText = btn.innerText;
-              
-              btn.innerHTML = "<i class='ph ph-spinner ph-spin'></i> Sending...";
-              btn.style.opacity = "0.7";
-              
-              setTimeout(() => {
-                  alert("Thanks for your message! (Demo Only)");
-                  btn.innerText = "Message Sent!";
-                  btn.style.background = "#48BB78"; 
-                  setTimeout(() => {
-                      btn.innerText = originalText;
-                      btn.style.background = ""; 
-                      btn.style.opacity = "1";
-                      form.reset();
-                  }, 3000);
-              }, 1500);
           });
       }
     });

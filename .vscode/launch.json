@@ -1,0 +1,142 @@
+{
+  "version": "1.0.0",
+  "profile": {
+    "name": "Ishika Yadav",
+    "role": "Marketing Executive",
+    "location": "Kota, Rajasthan, India",
+    "headshot": "assets/portrait.jpg",
+    "tagline": "I generate qualified B2B leads and brand buzz.",
+    "bio": "Marketing professional focused on B2B outreach, social media growth, and CRM optimization. I blend creativity with analytics to deliver measurable outcomes."
+  },
+  "hero": {
+    "intro": "👋 Hey there, I’m",
+    "headline": "B2B Marketing & Lead Generation Strategist",
+    "subtext": "I create data-driven outreach systems and brand growth campaigns that help businesses scale faster.",
+    "ctas": [
+      { "label": "Book a Call", "href": "#contact", "variant": "primary" },
+      { "label": "Download CV", "href": "assets/cv.pdf", "variant": "secondary", "download": true }
+    ]
+  },
+  "metrics": [
+    { "label": "Qualified Leads (6 mo)", "value": 1000, "format": "kplus" },
+    { "label": "Revenue Impact", "value": "₹10L+" },
+    { "label": "Reply Rate Improvement", "value": "40%" },
+    { "label": "Top Performer", "value": "Q1 2025" }
+  ],
+  "skills": {
+    "lead_gen": ["Cold Calling", "Cold Emailing", "LinkedIn Outreach"],
+    "crm": ["HubSpot", "Zoho CRM"],
+    "marketing": ["Campaign Strategy", "Social Media", "Sponsorships & PR"],
+    "tools": ["Figma", "Canva", "CapCut", "InShot", "Apollo.io", "Mailchimp"],
+    "core": ["Communication", "Leadership", "Time Management", "Critical Thinking"]
+  },
+  "experience": [
+    {
+      "role": "Marketing Executive – Lead Generation",
+      "company": "Enhance IT",
+      "location": "Remote",
+      "dates": "Oct 2024 – Dec 2024",
+      "bullets": [
+        "Executed 15–30 cold calls/day to warm prospects",
+        "Ran A/B cold-email campaigns achieving +25% open rate",
+        "Built 500+ lead pipeline via LinkedIn + CRM (HubSpot/Zoho)",
+        "Improved monthly conversions by ~10% with better CRM hygiene"
+      ]
+    },
+    {
+      "role": "Sponsorship & Social Media Coordinator",
+      "company": "COER University Fest",
+      "location": "Roorkee",
+      "dates": "Aug 2023 – Dec 2024",
+      "bullets": [
+        "Closed tiered sponsorships and managed stakeholder relations",
+        "Planned and executed social campaigns for live events",
+        "Led on-ground coordination under pressure"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "title": "Enhance IT Lead Engine",
+      "tag": "B2B Outreach",
+      "objective": "Build a predictable qualified lead system",
+      "strategy": "LinkedIn sequences + personalized cold calls + CRM follow-ups",
+      "outcomes": ["1000+ verified leads", "40% reply-rate uplift"],
+      "links": []
+    },
+    {
+      "title": "COER Fest Sponsorships",
+      "tag": "Event Marketing",
+      "objective": "Increase sponsor revenue and brand reach",
+      "strategy": "Tiered packages, outreach sprints, influencer tie-ins",
+      "outcomes": ["₹10L+ influenced revenue", "3× engagement uplift"],
+      "links": []
+    }
+  ],
+  "education": [
+    {
+      "degree": "B.Tech (CSE)",
+      "institution": "College of Engineering Roorkee (COER)",
+      "dates": "2023 – 2027"
+    },
+    {
+      "degree": "Intermediate (PCM)",
+      "institution": "Modi Public School, Kota",
+      "dates": "2021 – 2022"
+    }
+  ],
+  "languages": [
+    { "name": "English", "level": "Fluent" },
+    { "name": "Hindi", "level": "Native" }
+  ],
+  "contact": {
+    "email": "Yadavishika2130@gmail.com",
+    "phone": "+91 9079682173",
+    "form_action": "https://formspree.io/f/placeholder"
+  },
+  "social": {
+    "linkedin": "https://linkedin.com/in/ishikayadav"
+  },
+  "seo": {
+    "site_url": "https://ishikayadav.com",
+    "title": "Ishika Yadav | Marketing & Growth Strategist",
+    "description": "B2B Lead Generation, Social Media Marketing, and Growth Strategy."
+  },
+  "theme": {
+    "default": "light",
+    "colors": {
+      "light": {
+        "bg": "#FDFCFB",
+        "text": "#141414",
+        "muted": "#565656",
+        "accent1": "#6C4CF4",
+        "accent2": "#FF4FD8"
+      },
+      "dark": {
+        "bg": "#0C0C12",
+        "text": "#F5F7FA",
+        "muted": "#A4A6B1",
+        "accent1": "#9A7BFF",
+        "accent2": "#64E9FF"
+      }
+    }
+  },
+  "easter_eggs": {
+    "konami": {
+      "enabled": true,
+      "reward": {
+        "type": "download",
+        "label": "Cold Email Swipe File",
+        "file": "assets/Ishika_Cold_Email_Swipes.pdf"
+      }
+    }
+  },
+  "ui": {
+    "show_section_dots": true,
+    "show_cursor_halo": true,
+    "reduce_motion_prefers": true
+  },
+  "configurations": [
+  
+  ]
+}
